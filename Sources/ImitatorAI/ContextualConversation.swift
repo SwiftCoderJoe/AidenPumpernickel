@@ -1,14 +1,21 @@
+/// Represents a conversation and its authors.
+/// 
+/// `ContextualConversation` will keep track of all messages sent in a conversation and who sent them.
+/// The exact type that is provided for each author is irrelevant—each author is only described using a
+/// simple "A said B said" dialogue structure.
 public class ContextualConversation {
     private var messages: [ContextualMessage] = []
     private var authors: [Int: String] = [:]
     private var numberOfAuthors = 0
 
-
-    /// Documentation needed
+    /// Add a single message to the conversation.
+    ///
+    /// The exact type that is provided for each author is irrelevant—each author is only described using a
+    /// simple "A said B said" dialogue structure. 
     public func addMessage<T: Hashable>(from author: T, saying content: String) -> Self {
         if !authors.contains(where: { (key, _) in key == author.hashValue}) {
             authors[author.hashValue] = authorCodes[numberOfAuthors]
-            numberOfAuthors += 1;
+            numberOfAuthors += 1
         }
 
         guard let authorCode = authors[author.hashValue] else {
