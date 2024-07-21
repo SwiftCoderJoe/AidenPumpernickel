@@ -3,7 +3,7 @@ import XCTest
 
 final class ImitatorAITests: XCTestCase {
     func testPromptGeneration() async throws {
-        let imitator = Imitator(apiKey: "Your API Key Here")
+        let imitator = Imitator()
             .addStyleContext(from: .init()
                 .addMessage(from: 0, saying: "Hello there young chap!")
                 .addMessage(from: 1, saying: "Ah yes, thank you for welcoming me so pleasently.")

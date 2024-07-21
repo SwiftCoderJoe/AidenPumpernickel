@@ -6,12 +6,12 @@ public class ContextualConversation {
 
     /// Documentation needed
     public func addMessage<T: Hashable>(from author: T, saying content: String) -> Self {
-        if !authors.contains(where: { (key, _) in key == author}) {
+        if !authors.contains(where: { (key, _) in key == author.hashValue}) {
             authors[author.hashValue] = authorCodes[numberOfAuthors]
             numberOfAuthors += 1;
         }
 
-        guard let authorCode = authors[author] else {
+        guard let authorCode = authors[author.hashValue] else {
             fatalError("Could not find an author code for author \(author)")
         }
 
