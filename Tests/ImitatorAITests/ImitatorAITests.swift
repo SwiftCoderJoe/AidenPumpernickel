@@ -1,9 +1,9 @@
 import XCTest
-@testable import AidenPumpernickel
+@testable import ImitatorAI
 
-final class AidenPumpernickelTests: XCTestCase {
+final class ImitatorAITests: XCTestCase {
     func testPromptGeneration() async throws {
-        let aiden = AidenPumpernickel(apiKey: "Your API Key Here")
+        let imitator = Imitator(apiKey: "Your API Key Here")
             .addStyleContext(from: .init()
                 .addMessage(from: 0, saying: "Hello there young chap!")
                 .addMessage(from: 1, saying: "Ah yes, thank you for welcoming me so pleasently.")
@@ -31,7 +31,7 @@ final class AidenPumpernickelTests: XCTestCase {
                 .addMessage(from: 1, saying: "Yes, tell us immediately!")
             )
 
-        XCTAssertEqual(aiden.prompt(), correctPrompt)
+        XCTAssertEqual(imitator.prompt(), correctPrompt)
     }
 }
 

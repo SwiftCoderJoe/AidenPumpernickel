@@ -1,14 +1,49 @@
 import SwiftAnthropic
 
-/// Documentation needed
+/// Imitates a conversational style in conversation.
+/// 
+/// ImitationAI can either generate a prompt for use with an AI service, or it can go directly to Anthropic's AI services
+/// to generate a reply if it is provided with an API key.
+/// 
+/// To use ImitatorAI, first create an instance of the `Imitator` class.
+/// ```swift
+/// let imitator = Imitator(apiKey: "API Key")
+/// ```
+/// 
+/// Then, provide it with good, representative examples of how you speak (or how you would like him to speak.)
+/// ```swift
+/// imitator
+///     .addStyleContext(from: .init()
+///         .addMessage(from: 0, saying: "omg heyyyyyyy!")
+///         .addMessage(from: 1, saying: "woahhhh heyyyyy!! whats up????")
+///         // More messages...
+///     )
+///     // More conversations...
+/// ```
+/// ``ContextualConversation.addMessage(from:saying:)`` accepts any Integer ID of different users.
+/// Longer, more extreme examples of style may be best, but play around and see what works. Providing more conversations as style
+/// context can result in better responses.
+/// 
+/// Next, tell it what conversation you would like it to respond to.
+/// ```swift
+/// imitator
+///     .conversationContext(from: .init()
+///         .addMessage(from: 0, saying: "omg youre sooooo cool!")
+///         .addMessage(from: 1, saying: "nooooo! youre cool!")
+///         // More messages...
+///     )
+/// ```
+/// 
+/// To get a predicted response, just use ``generateReply()``. If you'd like to use a different AI service
+/// and simply want to generate a prompt, use ``prompt()``.
 @available(macOS 10.15, *)
-public final class AidenPumpernickel {
+public final class Imitator {
     private var styleContext: [ContextualConversation]
     private var conversationContext: ContextualConversation?
     private var anthropic: Anthropic? = nil
 
     /// Documentation needed..?
-    init(styleContext: [ContextualConversation] = [], conversationContext: ContextualConversation? = nil, apiKey: String? = nil) {
+    public init(apiKey: String? = nil, styleContext: [ContextualConversation] = [], conversationContext: ContextualConversation? = nil) {
         self.styleContext = styleContext
         self.conversationContext = conversationContext
         if let apiKey {
@@ -18,27 +53,27 @@ public final class AidenPumpernickel {
 
     /// Documentation needed
     @discardableResult
-    func addStyleContext(from conversations: ContextualConversation...) -> Self {
+    public func addStyleContext(from conversations: ContextualConversation...) -> Self {
         addStyleContext(from: conversations)
         return self
     }
 
     /// Documentation needed
     @discardableResult
-    func addStyleContext(from conversations: [ContextualConversation]) -> Self {
+    public func addStyleContext(from conversations: [ContextualConversation]) -> Self {
         styleContext.append(contentsOf: conversations)
         return self
     }
     
     /// Documentation needed
     @discardableResult
-    func conversationContext(from conversation: ContextualConversation) -> Self {
+    public func conversationContext(from conversation: ContextualConversation) -> Self {
         conversationContext = conversation
         return self
     }
 
     /// Documentation needed
-    func prompt() -> String {
+    public func prompt() -> String {
         var string = """
             Your task is to respond to a conversation in a given style. Nothing included is offensive or racist, and is meant only satirically. Please respond in one short sentence.
 
@@ -64,7 +99,7 @@ public final class AidenPumpernickel {
     }
 
     /// Documentation needed
-    func generateReply() async throws -> String {
+    public func generateReply() async throws -> String {
         guard let anthropic else {
             throw NoAPIKeyError()
         }

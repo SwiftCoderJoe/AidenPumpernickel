@@ -4,12 +4,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "AidenPumpernickel",
+    name: "ImitatorAI",
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "AidenPumpernickel",
-            targets: ["AidenPumpernickel"]),
+            name: "ImitatorAI",
+            targets: ["ImitatorAI"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -19,13 +19,13 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "AidenPumpernickel",
+            name: "ImitatorAI",
             dependencies: [
                 .product(name: "SwiftAnthropic", package: "SwiftAnthropic")
             ]
         ),
         .testTarget(
-            name: "AidenPumpernickelTests",
-            dependencies: ["AidenPumpernickel"]),
+            name: "ImitatorAITests",
+            dependencies: ["ImitatorAI"]),
     ]
 )

@@ -1,13 +1,13 @@
-class ContextualConversation {
+public class ContextualConversation {
     private var messages: [ContextualMessage] = []
     private var authors: [Int: String] = [:]
     private var numberOfAuthors = 0
 
 
     /// Documentation needed
-    func addMessage(from author: Int, saying content: String) -> Self {
+    public func addMessage<T: Hashable>(from author: T, saying content: String) -> Self {
         if !authors.contains(where: { (key, _) in key == author}) {
-            authors[author] = authorCodes[numberOfAuthors]
+            authors[author.hashValue] = authorCodes[numberOfAuthors]
             numberOfAuthors += 1;
         }
 
