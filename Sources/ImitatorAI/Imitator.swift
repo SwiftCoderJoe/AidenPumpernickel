@@ -2,7 +2,7 @@ import SwiftAnthropic
 
 /// Imitates a conversational style in conversation.
 /// 
-/// ImitationAI can either generate a prompt for use with an AI service, or it can go directly to Anthropic's AI services
+/// ImitatorAI can either generate a prompt for use with an AI service, or it can go directly to Anthropic's AI services
 /// to generate a reply if it is provided with an API key.
 /// 
 /// To use ImitatorAI, first create an instance of the `Imitator` class.
@@ -20,7 +20,7 @@ import SwiftAnthropic
 ///     )
 ///     // More conversations...
 /// ```
-/// ``ContextualConversation.addMessage(from:saying:)`` accepts any Integer ID of different users.
+/// ``ContextualConversation/addMessage(from:saying:)`` accepts any ID of different users.
 /// Longer, more extreme examples of style may be best, but play around and see what works. Providing more conversations as style
 /// context can result in better responses.
 /// 
