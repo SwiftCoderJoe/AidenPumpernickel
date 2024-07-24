@@ -15,6 +15,7 @@ public class ContextualConversation {
     ///
     /// The exact type that is provided for each author is irrelevant—each author is only described using a
     /// simple "A said B said" dialogue structure. 
+    @discardableResult
     public func addMessage<T: Hashable>(from author: T, saying content: String) -> Self {
         if !authors.contains(where: { (key, _) in key == author.hashValue}) {
             authors[author.hashValue] = authorCodes[numberOfAuthors]
