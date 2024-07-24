@@ -8,6 +8,9 @@ public class ContextualConversation {
     private var authors: [Int: String] = [:]
     private var numberOfAuthors = 0
 
+    /// Create a conversation with no messages.
+    public init() { }
+
     /// Add a single message to the conversation.
     ///
     /// The exact type that is provided for each author is irrelevant—each author is only described using a
