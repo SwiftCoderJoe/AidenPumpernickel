@@ -5,7 +5,7 @@ import SwiftAnthropic
 /// ImitatorAI can either generate a prompt for use with an AI service, or it can go directly to Anthropic's AI services
 /// to generate a reply if it is provided with an API key.
 /// 
-/// To use ImitatorAI, first create an instance of the `Imitator` class.
+/// To use ImitatorAI, first create an instance of the `Imitator` structure.
 /// ```swift
 /// let imitator = Imitator(apiKey: "API Key")
 /// ```
@@ -37,7 +37,7 @@ import SwiftAnthropic
 /// To get a predicted response, just use ``generateReply()``. If you'd like to use a different AI service
 /// and simply want to generate a prompt, use ``prompt()``.
 @available(macOS 10.15, *)
-public final class Imitator {
+public struct Imitator {
     private var styleContext: [ContextualConversation]
     private var conversationContext: ContextualConversation?
     private var anthropic: Anthropic?
@@ -57,21 +57,21 @@ public final class Imitator {
 
     /// Add example conversations to describe how the AI model should speak.
     @discardableResult
-    public func addStyleContext(from conversations: ContextualConversation...) -> Self {
+    public mutating func addStyleContext(from conversations: ContextualConversation...) -> Self {
         addStyleContext(from: conversations)
         return self
     }
 
     /// Add example conversations to describe how the AI model should speak.
     @discardableResult
-    public func addStyleContext(from conversations: [ContextualConversation]) -> Self {
+    public mutating func addStyleContext(from conversations: [ContextualConversation]) -> Self {
         styleContext.append(contentsOf: conversations)
         return self
     }
 
     /// Add (or replace, if already added) a conversation to which the AI model should reply to.
     @discardableResult
-    public func conversationContext(from conversation: ContextualConversation) -> Self {
+    public mutating func conversationContext(from conversation: ContextualConversation) -> Self {
         conversationContext = conversation
         return self
     }
