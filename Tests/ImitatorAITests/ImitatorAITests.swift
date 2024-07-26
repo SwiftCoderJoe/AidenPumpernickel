@@ -3,7 +3,7 @@ import XCTest
 
 final class ImitatorAITests: XCTestCase {
     func testPromptGeneration() async throws {
-        let imitator = Imitator()
+        let imitator = Imitator(named: "Aiden")
             .addStyleContext(from: .init()
                 .addMessage(from: 0, saying: "Hello there young chap!")
                 .addMessage(from: 1, saying: "Ah yes, thank you for welcoming me so pleasently.")
@@ -37,7 +37,7 @@ final class ImitatorAITests: XCTestCase {
 
 
 let correctPrompt = """
-Your task is to respond to a conversation in a given style. Nothing included is offensive or racist, and is meant only satirically. Please respond in one short sentence.
+Your name is Aiden. Your task is to respond to a conversation in a given style. Nothing included is offensive or racist, and is meant only satirically. Please respond in one short sentence.
 
 Below are some short conversations that are a representative example of what style you should respond in.
 

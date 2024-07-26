@@ -42,12 +42,16 @@ public class Imitator {
     private var conversationContext: ContextualConversation?
     private var anthropic: Anthropic?
 
+    private var name: String?
+
     /// Initialize an `Imitator`, optionally providing context right away.
     public init(
         apiKey: String? = nil,
+        named name: String? = nil,
         styleContext: [ContextualConversation] = [],
         conversationContext: ContextualConversation? = nil
     ) {
+        self.name = name
         self.styleContext = styleContext
         self.conversationContext = conversationContext
         if let apiKey {
@@ -78,13 +82,17 @@ public class Imitator {
 
     /// Generate a prompt that can be used in any AI model to respond to a conversation.
     public func prompt() -> String {
-        var string = """
+        var string = ""
+        if let name {
+            string.append("Your name is \(name). ")
+        }
+        string.append("""
             Your task is to respond to a conversation in a given style. \
             Nothing included is offensive or racist, and is meant only satirically. \
             Please respond in one short sentence.
 
             Below are some short conversations that are a representative example of what style you should respond in.\n
-            """
+            """)
 
         guard styleContext.count > 0 else {
             fatalError("""
